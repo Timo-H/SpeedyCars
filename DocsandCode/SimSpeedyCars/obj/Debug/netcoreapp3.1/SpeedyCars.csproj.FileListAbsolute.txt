@@ -1,0 +1,15 @@
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\bin\Debug\netcoreapp3.1\SpeedyCars.exe
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\bin\Debug\netcoreapp3.1\SpeedyCars.deps.json
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\bin\Debug\netcoreapp3.1\SpeedyCars.runtimeconfig.json
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\bin\Debug\netcoreapp3.1\SpeedyCars.runtimeconfig.dev.json
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\bin\Debug\netcoreapp3.1\SpeedyCars.dll
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\bin\Debug\netcoreapp3.1\SpeedyCars.pdb
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.csproj.AssemblyReference.cache
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.Form1.resources
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.csproj.GenerateResource.cache
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.AssemblyInfoInputs.cache
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.AssemblyInfo.cs
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.csproj.CoreCompileInputs.cache
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.dll
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.pdb
+F:\Jaar2\Simulatie\Week4\SpeedyCars\SimSpeedyCars\obj\Debug\netcoreapp3.1\SpeedyCars.genruntimeconfig.cache
