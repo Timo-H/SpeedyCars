@@ -1220,7 +1220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6139209479431378743, guid: 96911eee50f10584ebbf633a33cd9428, type: 3}
       propertyPath: m_Name
-      value: Traffic Light (1)
+      value: Traffic Light
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96911eee50f10584ebbf633a33cd9428, type: 3}

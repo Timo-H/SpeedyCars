@@ -10,4 +10,9 @@ public class Road : MonoBehaviour
     {
         return maxSpeed;
     }
+    
+    public bool IsHorizontal()
+    {
+        return gameObject.transform.rotation.z == 0;
+    }
 }
