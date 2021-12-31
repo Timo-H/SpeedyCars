@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System;
 
 public class Car : MonoBehaviour
@@ -11,6 +12,9 @@ public class Car : MonoBehaviour
     public bool isCollidingWithRoad = false;
     public bool isCollidingWithVehicle = false;
     public bool goingMaxSpeed = false;
+    public bool turning = false;
+    public bool seeingRedTrafficLight = false;
+    public int seeingTrafficLights = 0;
     public float position;
     public float rotation;
     public string direction;
@@ -28,12 +32,12 @@ public class Car : MonoBehaviour
 
         if (direction == "north" || direction == "south")
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, speed);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
             position = transform.position.y;
         }
         else
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(speed, GetComponent<Rigidbody2D>().velocity.y);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
             position = transform.position.x;
         }
 
@@ -44,83 +48,95 @@ public class Car : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.name.Contains("Car") && !isCollidingWithVehicle)
+        if (col.gameObject.GetComponent<Car>() != null)
         {
-            Car backCar = transform.GetComponent<Car>();
-            if (!isCarInFront(position, col.GetComponent<Car>().position, direction))
+            if (col.gameObject.name.Contains("Car") && !isCollidingWithVehicle)
             {
-                Debug.Log(transform.name + " zit achter " + col.name);
-                backCar = col.GetComponent<Car>();
-            }
-            if (direction == col.GetComponent<Car>().direction)
-            {
-                backCar.slowingDown = true;
-                backCar.SetSpeed(col.GetComponent<Car>().speed);
-                backCar.goingMaxSpeed = false;
-                backCar.isCollidingWithVehicle = true;
-                Debug.Log(transform.name + " is behind other car, slowing down!");
+                Car backCar = transform.GetComponent<Car>();
+                if (!isCarInFront(position, col.GetComponent<Car>().position, direction))
+                {
+                    backCar = col.GetComponent<Car>();
+                }
+                if (direction == col.GetComponent<Car>().direction)
+                {
+                    backCar.slowingDown = true;
+                    backCar.SetSpeed(col.GetComponent<Car>().speed);
+                    backCar.goingMaxSpeed = false;
+                    backCar.isCollidingWithVehicle = true;
+                }
             }
         }
+        
         if (col.gameObject.name.Contains("Road") && !isCollidingWithRoad)
         {
-            road = col.GetComponent<Road>();
-            if (!waitingForTrafficLight && !slowingDown && !waitingForAnotherCar && !isCollidingWithVehicle && !goingMaxSpeed)
+            if (road == null)
             {
-                SetSpeed(road.GetMaxSpeed());
-                goingMaxSpeed = true;
-                Debug.Log(transform.name + " entered new road, changing speed");
+                road = col.GetComponent<Road>();
+                if (!waitingForTrafficLight && !slowingDown && !waitingForAnotherCar && !isCollidingWithVehicle && !goingMaxSpeed)
+                {
+                    SetSpeed(road.GetMaxSpeed());
+                    goingMaxSpeed = true;
+                }
+                isCollidingWithRoad = true;
+            } else
+            {
+                if (col.transform.rotation.eulerAngles.z != road.transform.rotation.eulerAngles.z && !turning)
+                {
+                    road = col.GetComponent<Road>();
+                    StartCoroutine(TurnRight());
+                }
             }
-            isCollidingWithRoad = true;
+            
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.name.Contains("Car") && isCollidingWithVehicle)
+        if (col.gameObject.GetComponent<Car>() != null)
         {
-            Car backCar = transform.GetComponent<Car>();
-            if (!isCarInFront(position, col.GetComponent<Car>().position, direction))
+            if (col.gameObject.name.Contains("Car") && isCollidingWithVehicle)
             {
-                Debug.Log(transform.name + " zit achter " + col.name);
-                backCar = col.GetComponent<Car>();
-            }
-            if (direction == col.GetComponent<Car>().direction)
-            {
-                backCar.slowingDown = false;
-                backCar.waitingForAnotherCar = false;
-                Debug.Log(transform.name + " (direction: " + direction + ") is no longer slowing down or waiting");
-                backCar.isCollidingWithVehicle = false;
-                backCar.SetSpeed(road.GetMaxSpeed() * 0.75f);
-                backCar.goingMaxSpeed = false;
-                Debug.Log(transform.name + " too close to car in front, matching speed!");
+                Car backCar = transform.GetComponent<Car>();
+                if (!isCarInFront(position, col.GetComponent<Car>().position, direction))
+                {
+                    backCar = col.GetComponent<Car>();
+                }
+                if (direction == col.GetComponent<Car>().direction)
+                {
+                    backCar.slowingDown = false;
+                    backCar.waitingForAnotherCar = false;
+                    backCar.isCollidingWithVehicle = false;
+                    backCar.SetSpeed(road.GetMaxSpeed() * 0.75f);
+                    backCar.goingMaxSpeed = false;
+                }
             }
         }
     }
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.name.Contains("Car"))
+        if (col.GetComponent<Car>() != null)
         {
-            Car backCar = transform.GetComponent<Car>();
-            if (!isCarInFront(position, col.GetComponent<Car>().position, direction))
+            if (col.gameObject.name.Contains("Car"))
             {
-                Debug.Log(transform.name + " zit achter " + col.name);
-                backCar = col.GetComponent<Car>();
+                Car backCar = transform.GetComponent<Car>();
+                if (!isCarInFront(position, col.GetComponent<Car>().position, direction))
+                {
+                    backCar = col.GetComponent<Car>();
+                }
+                if (direction == col.GetComponent<Car>().direction)
+                {
+                    backCar.isCollidingWithVehicle = true;
+                    if (backCar.speed == 0)
+                    {
+                        backCar.waitingForAnotherCar = true;
+                    }
+                    else
+                    {
+                        backCar.SetSpeed(road.GetMaxSpeed() * 0.75f);
+                    }
+                }
             }
-            if (direction == col.GetComponent<Car>().direction)
-            {
-                backCar.isCollidingWithVehicle = true;
-                if (backCar.speed == 0)
-                {
-                    backCar.waitingForAnotherCar = true;
-                    Debug.Log(transform.name + " (direction: " + direction + ") is waiting for another car");
-                }
-                else
-                {
-                    backCar.SetSpeed(road.GetMaxSpeed() * 0.75f);
-                    Debug.Log(transform.name + " too close to car in front, slowing down!");
-                }
-            } 
         }
         if (col.gameObject.name.Contains("Road"))
         {
@@ -156,12 +172,10 @@ public class Car : MonoBehaviour
             if (direction == "west" || direction == "south")
             {
                 speed = newSpeed * -1;
-                Debug.Log(transform.name + " (direction: " + direction + ") Speed changed to " + speed);
             }
             else if (direction == "north" || direction == "east")
             {
                 speed = newSpeed;
-                Debug.Log(transform.name + " (direction: " + direction + ") Speed changed to " + speed);
             }
         }
     }
@@ -182,7 +196,7 @@ public class Car : MonoBehaviour
         {
             direction = "south";
             velocity = rb.velocity.y;
-        } else if (rotation == -90)
+        } else if (rotation == 270)
         {
             direction = "east";
             velocity = rb.velocity.x;
@@ -192,6 +206,7 @@ public class Car : MonoBehaviour
     private void checkForTrafficLight(Road road)
     {
         int childCount = road.transform.childCount;
+        seeingTrafficLights = childCount;
         if (childCount > 0)
         {
             for (var i = 0; i < childCount; ++i)
@@ -199,23 +214,30 @@ public class Car : MonoBehaviour
                 var child = road.transform.GetChild(i);
                 if (child.gameObject.name.Contains("Traffic Light"))
                 {
-                    if (child.gameObject.GetComponent<TrafficLight>().direction == direction && !child.GetComponent<TrafficLight>().green) 
+                    if (child.gameObject.GetComponent<TrafficLight>().direction == direction) 
                     {
-                        StopForTrafficLight(child);
+                        if (!child.GetComponent<TrafficLight>().green)
+                        {
+                            seeingRedTrafficLight = true;
+                            StopForTrafficLight(child);
+                        } else
+                        {
+                            seeingRedTrafficLight = false;
+                            if (waitingForTrafficLight)
+                            {
+                                waitingForTrafficLight = false;
+                                waitingForAnotherCar = false;
+                            }
+
+                            if (!waitingForTrafficLight && !slowingDown && !waitingForAnotherCar && !isCollidingWithVehicle && velocity == 0 && !goingMaxSpeed)
+                            {
+                                SetSpeed(road.GetMaxSpeed());
+                                goingMaxSpeed = true;
+                            }
+                        }
                     } else
                     {
-                        if (waitingForTrafficLight)
-                        {
-                            waitingForTrafficLight = false;
-                            waitingForAnotherCar = false;
-                        }
                         
-                        if (!waitingForTrafficLight && !slowingDown && !waitingForAnotherCar && !isCollidingWithVehicle && velocity == 0 && !goingMaxSpeed)
-                        {
-                            Debug.Log(transform.name + " light green, continue!");
-                            SetSpeed(road.GetMaxSpeed());
-                            goingMaxSpeed = true;
-                        }
                     }
                 }
             }
@@ -233,12 +255,28 @@ public class Car : MonoBehaviour
         {
             trafficLightDistance = Math.Abs(stopPosition - gameObject.transform.position.x);
         }
-
         if (trafficLightDistance < 1 && CanBreak(velocity, 20, trafficLightDistance) && !waitingForTrafficLight)
         {
+            Debug.Log("StopCheck");
             SetSpeed(0);
-            Debug.Log(transform.name + " Stopped for traffic light");
             waitingForTrafficLight = true;
+        }
+    }
+
+    private IEnumerator TurnRight()
+    {
+        if (!turning)
+        {
+            yield return new WaitForSeconds(0.4f);
+            float newZRotation = transform.rotation.eulerAngles.z - 90;
+            if (newZRotation < 0)
+            {
+                newZRotation = 270;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, newZRotation);
+            turning = true;
+            yield return new WaitForSeconds(3f);
+            turning = false;
         }
     }
 

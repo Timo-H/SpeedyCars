@@ -204,6 +204,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8041570788976405543, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
   m_PrefabInstance: {fileID: 1640038707}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &65344650 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6139209479431378741, guid: 96911eee50f10584ebbf633a33cd9428, type: 3}
+  m_PrefabInstance: {fileID: 1331920336}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &123940426 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6139209479431378741, guid: 96911eee50f10584ebbf633a33cd9428, type: 3}
+  m_PrefabInstance: {fileID: 1549816704}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &192585153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -717,6 +727,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1527664477345619905, guid: 4b56f886246dc974681581b35d6f4a82, type: 3}
   m_PrefabInstance: {fileID: 357640574}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &451460946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6139209479431378741, guid: 96911eee50f10584ebbf633a33cd9428, type: 3}
+  m_PrefabInstance: {fileID: 318892796}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &473933818
 GameObject:
@@ -1750,7 +1765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8041570788976405542, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
       propertyPath: maxSpawnTime
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8041570788976405543, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
       propertyPath: m_RootOrder
@@ -1991,7 +2006,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 266852651783357067, guid: db4e19c2c5a0fef49b61539b94bb372b, type: 3}
       propertyPath: maxSpeed
-      value: 33
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 266852651783357069, guid: db4e19c2c5a0fef49b61539b94bb372b, type: 3}
       propertyPath: m_RootOrder
@@ -2420,6 +2435,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1429673564}
     m_Modifications:
+    - target: {fileID: -4464355545139462733, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
+      propertyPath: m_Size.x
+      value: 5.1411705
+      objectReference: {fileID: 0}
+    - target: {fileID: -4464355545139462733, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
+      propertyPath: m_Offset.x
+      value: 2.0705853
+      objectReference: {fileID: 0}
     - target: {fileID: 8041570788976405540, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
       propertyPath: m_Name
       value: CarSpawner east
@@ -2478,6 +2501,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
+--- !u!4 &1419814192 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6139209479431378741, guid: 96911eee50f10584ebbf633a33cd9428, type: 3}
+  m_PrefabInstance: {fileID: 1051051355}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1429673563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,7 +2522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1429673564
 Transform:
   m_ObjectHideFlags: 0
@@ -2531,6 +2559,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371f99a455c23e746b152459df3561e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trafficLightNorth: {fileID: 1419814192}
+  trafficLightSouth: {fileID: 65344650}
+  trafficLightWest: {fileID: 451460946}
+  trafficLightEast: {fileID: 123940426}
+  switchIntervalSec: 6
 --- !u!1 &1471194309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,7 +3036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 266852651783357067, guid: db4e19c2c5a0fef49b61539b94bb372b, type: 3}
       propertyPath: maxSpeed
-      value: 33
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 266852651783357069, guid: db4e19c2c5a0fef49b61539b94bb372b, type: 3}
       propertyPath: m_RootOrder
@@ -3075,6 +3108,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1429673564}
     m_Modifications:
+    - target: {fileID: -4464355545139462733, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
+      propertyPath: m_Size.x
+      value: 3.530951
+      objectReference: {fileID: 0}
+    - target: {fileID: -4464355545139462733, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
+      propertyPath: m_Offset.x
+      value: -1.2654755
+      objectReference: {fileID: 0}
     - target: {fileID: 8041570788976405540, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
       propertyPath: m_Name
       value: CarSpawner west
@@ -3082,6 +3123,10 @@ PrefabInstance:
     - target: {fileID: 8041570788976405542, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
       propertyPath: direction
       value: west
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041570788976405542, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
+      propertyPath: maxSpawnTime
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8041570788976405543, guid: 6139839ff7b9b364294dfe4947b5e3df, type: 3}
       propertyPath: m_RootOrder
@@ -3250,7 +3295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1861028227
 Transform:
   m_ObjectHideFlags: 0
@@ -3444,7 +3489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 266852651783357067, guid: db4e19c2c5a0fef49b61539b94bb372b, type: 3}
       propertyPath: maxSpeed
-      value: 33
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 266852651783357069, guid: db4e19c2c5a0fef49b61539b94bb372b, type: 3}
       propertyPath: m_RootOrder

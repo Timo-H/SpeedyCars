@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
 {
-    float timer = 0f;
-    [SerializeField] float spawnTime = 2f;
+    private float timer = 0f;
+    [SerializeField] float maxSpawnTime = 2f;
     [SerializeField] string direction;
 
     [SerializeField] GameObject carPrefab;
-    int numCars = 0;
+    private int numCars = 0;
+    public bool canSpawn = true;
+    private float spawnTime;
 
     Dictionary<string, float> rotations = new Dictionary<string, float>();
 
@@ -19,6 +21,8 @@ public class CarSpawner : MonoBehaviour
         rotations.Add("east", 270);
         rotations.Add("south", 180);
         rotations.Add("west", 90);
+
+        spawnTime = Random.Range(2, maxSpawnTime);
     }
     void FixedUpdate()
     {
@@ -26,9 +30,19 @@ public class CarSpawner : MonoBehaviour
         if (timer > spawnTime)
         {
             timer -= spawnTime;
-
+            spawnTime = Random.Range(2, maxSpawnTime);
             // Spawn Car
             Instantiate(carPrefab, transform.position, Quaternion.Euler(0, 0, rotations[direction])).name = $"Car {++numCars}";
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        canSpawn = false;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        canSpawn = true;
     }
 }

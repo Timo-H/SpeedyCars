@@ -12,7 +12,7 @@ public class UpdateText : MonoBehaviour
     private float lastUpdateTime = 0f;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         lastUpdateTime += Time.deltaTime;
 
@@ -21,7 +21,7 @@ public class UpdateText : MonoBehaviour
             lastUpdateTime = 0f;
 
             Text myText = gameObject.GetComponent<Text>();
-            myText.text = variableName+" = "+DestroyCar.GetComponent<DestroyCar>().carThroughput;
-        }
+            myText.text = variableName + " = " + DestroyCar.GetComponent<DestroyCar>().carThroughput;
+        } 
     }
 }

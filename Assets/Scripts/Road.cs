@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
-    [SerializeField] float maxSpeed = 50;
+    public float maxSpeed = 50;
 
     public float GetMaxSpeed()
     {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8041570788976405543}
   - component: {fileID: 8041570788976405542}
+  - component: {fileID: -4464355545139462733}
   m_Layer: 0
   m_Name: CarSpawner
   m_TagString: Untagged
@@ -46,3 +47,29 @@ MonoBehaviour:
   spawnTime: 2.5
   direction: north
   carPrefab: {fileID: 3020593524933042947, guid: c9b1f57c44e94b24887a1e43ba9d3cfd, type: 3}
+--- !u!61 &-4464355545139462733
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8041570788976405540}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
